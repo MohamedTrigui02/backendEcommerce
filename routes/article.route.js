@@ -26,14 +26,15 @@ router.post('/',async (req, res) => {
     }
     });
     //-------
-    router.get('/:articleId',async(req, res)=>{
+    router.get('/:articleId', async (req, res) => {
         try {
-        const art = await article.findById(req.params.articleId);
-        res.status(200).json(art).populate("scategorieID");
+            const art = await article.findById(req.params.articleId).populate("scategorieID");
+            res.status(200).json(art);
         } catch (error) {
-        res.status(404).json({ message: error.message });
+            res.status(404).json({ message: error.message });
         }
-        });
+    });
+    
 //------------
 router.delete('/:articleId', async (req, res)=> {
     const id = req.params.articleId;

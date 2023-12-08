@@ -5,11 +5,13 @@ const categorie = require('./models/categorie');
 const categorieRouter=require("./routes/categorie.route");
 const scategorieRouter=require("./routes/scategorie.route");
 const articleRouter=require("./routes/article.route");
-//const cors = require('cors')
+const paymentRouter = require( "./routes/payment.route.js")
+
+const cors = require('cors')
 dotenv.config()
 const app = express();
 //Les cors
-//app.use(cors())
+app.use(cors())
 //BodyParser Middleware
 app.use(express.json());
 mongoose.set("strictQuery", false);
@@ -24,6 +26,9 @@ console.log('Impossible de se connecter à la base de données', err);
 process.exit();
 });
 
+
+
+app.use('/api/payment', paymentRouter);
 app.use("/api/categories",categorieRouter)
 app.use("/api/scategories",scategorieRouter)
 app.use("/api/articles",articleRouter)
